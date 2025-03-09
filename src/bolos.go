@@ -7,6 +7,10 @@ import (
 )
 
 func main() {
+<<<<<<< HEAD
+=======
+	apagarEstaFuncao()
+>>>>>>> 2c44758 (comitando da maquina da loja)
 	mensagens.Saudacao()
 
 	for {
@@ -18,3 +22,10 @@ func main() {
 		rotinas.RotinaPrincipal(rotina)
 	}
 }
+<<<<<<< HEAD
+=======
+
+func apagarEstaFuncao() {
+	fmt.Println("pague esta função, eles etá apenas testando o git")
+}
+>>>>>>> 2c44758 (comitando da maquina da loja)
