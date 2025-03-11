@@ -6,13 +6,15 @@ import (
 )
 
 func AlteraProduto(codigoDoProduto int) {
+	log.Fatal("Codigo do Produto ", codigoDoProduto)
+
 	db, err := ConexaoBanco()
 	if err != nil {
 		log.Fatal("Erro co conectar ao banco de dados")
 	}
 	defer db.Close()
 
-	linha, err := db.Query("SELECT * FROM cadastra_produto where id = 'cocodigoDoProduto' ")
+	linha, err := db.Query("SELECT * FROM cadastra_produto where id = 'codigoDoProduto' ")
 	if err != nil {
 		log.Fatal("Erro ao criar o statement cobrança", err)
 	}
