@@ -9,7 +9,7 @@ import (
 func VendaProduto() {
 	var codigoDigitado int
 
-	fmt.Println("Código :")
+	fmt.Print("Código :")
 	fmt.Scan(&codigoDigitado)
 
 	descricao, precoDevenda := dataBase.BuscaProdutoNoBanco(codigoDigitado)

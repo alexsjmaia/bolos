@@ -1,12 +1,10 @@
 package dataBase
 
 import (
-	"fmt"
 	"log"
 )
 
 func AlteraProduto(codigoDoProduto int) {
-	log.Fatal("Codigo do Produto ", codigoDoProduto)
 
 	db, err := ConexaoBanco()
 	if err != nil {
@@ -14,28 +12,26 @@ func AlteraProduto(codigoDoProduto int) {
 	}
 	defer db.Close()
 
-	linha, err := db.Query("SELECT * FROM cadastra_produto where id = 'codigoDoProduto' ")
+	linhas, err := db.Query("SELECT * FROM cadastra_produto WHERE codigo_Produto = ?", codigoDoProduto)
+
 	if err != nil {
 		log.Fatal("Erro ao criar o statement cobrança", err)
 	}
-	defer linha.Close()
+	defer linhas.Close()
 
 	var Produto struct {
-		id                 int
-		codigoDoProduto    int
-		descricaoDoProduto string
-		precoDeCusto       float64
-		precoDeVenda       float64
+		Id                 int
+		CodigoDoProduto    int
+		DescricaoDoProduto string
+		PrecoDeCusto       float64
+		PrecoDeVenda       float64
 	}
 
-	if linha.Next() {
-		if err := linha.Scan(&Produto.id, &Produto.codigoDoProduto, &Produto.descricaoDoProduto, &Produto.precoDeCusto, &Produto.precoDeVenda); err != nil {
+	if linhas.Next() {
+		if err := linhas.Scan(&Produto.Id, &Produto.CodigoDoProduto, &Produto.DescricaoDoProduto, &Produto.PrecoDeCusto, &Produto.PrecoDeVenda); err != nil {
 			log.Fatal("Erro ao buscar os valores no banco", err)
-		} else {
-			fmt.Println(&Produto.descricaoDoProduto)
-			fmt.Println(&Produto.descricaoDoProduto)
-			log.Fatal("Pare aqui para ver no que deu...")
 		}
 	}
-	log.Fatal("Se chegou aqui não deu nada")
+
+	log.Fatal("Se chegou aqui não deu nada ", Produto.Id, Produto.CodigoDoProduto, Produto.DescricaoDoProduto, Produto.PrecoDeCusto, Produto.PrecoDeVenda)
 }
