@@ -1,8 +1,13 @@
 package dataBase
 
 import (
+	"bufio"
+	"fmt"
 	"log"
+	"os"
 )
+
+var TAMANHO_MINIMO_DESCRICAO_PRODUTO = 3
 
 func AlteraProduto(codigoDoProduto int) {
 
@@ -33,5 +38,38 @@ func AlteraProduto(codigoDoProduto int) {
 		}
 	}
 
-	log.Fatal("Se chegou aqui não deu nada ", Produto.Id, Produto.CodigoDoProduto, Produto.DescricaoDoProduto, Produto.PrecoDeCusto, Produto.PrecoDeVenda)
+	reader := bufio.NewReader(os.Stdin) // Cria um leitor para capturar entradas completas
+
+	fmt.Println("Código do produto :", Produto.CodigoDoProduto)
+	fmt.Println("Descrição : ", Produto.DescricaoDoProduto)
+	fmt.Println("Descrição Atual do Produto :", Produto.DescricaoDoProduto)
+
+	reader.ReadString('\n') // <-- Limpa o buffer após a leitura do código
+	fmt.Printf("Digite uma nova Descrição :")
+
+	var novaDescricaoProduto string
+	var novoPrecoDeCusto float64
+	var novoPrecoDeVenda float64
+
+	novaDescricaoProduto, _ = reader.ReadString('\n') // Lê a linha inteira, incluindo espaços
+	if len(novaDescricaoProduto) < TAMANHO_MINIMO_DESCRICAO_PRODUTO {
+		novaDescricaoProduto = Produto.DescricaoDoProduto
+	}
+
+	fmt.Println("Preço de Custo :", Produto.PrecoDeCusto)
+	fmt.Printf("Novo preço de custo :")
+	fmt.Scan(&novoPrecoDeCusto)
+	if novoPrecoDeCusto+0 == 0 {
+		novoPrecoDeCusto = Produto.PrecoDeCusto
+	}
+
+	fmt.Println("Preço de Venda :", Produto.PrecoDeVenda)
+	fmt.Printf("Novo Preço de Venda :")
+	fmt.Scan(&novoPrecoDeVenda)
+	if novoPrecoDeVenda+0 == 0 {
+		novoPrecoDeVenda = Produto.PrecoDeVenda
+	}
+
+	// Chamar o banco para salvar o Produto
+	SalvaProdutoEditado(Produto.CodigoDoProduto, novaDescricaoProduto, novoPrecoDeCusto, novoPrecoDeVenda)
 }
