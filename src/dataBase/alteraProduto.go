@@ -40,8 +40,6 @@ func AlteraProduto(codigoDoProduto int) {
 
 	reader := bufio.NewReader(os.Stdin) // Cria um leitor para capturar entradas completas
 
-	fmt.Println("Código do produto :", Produto.CodigoDoProduto)
-	fmt.Println("Descrição : ", Produto.DescricaoDoProduto)
 	fmt.Println("Descrição Atual do Produto :", Produto.DescricaoDoProduto)
 
 	reader.ReadString('\n') // <-- Limpa o buffer após a leitura do código
@@ -70,6 +68,5 @@ func AlteraProduto(codigoDoProduto int) {
 		novoPrecoDeVenda = Produto.PrecoDeVenda
 	}
 
-	// Chamar o banco para salvar o Produto
 	SalvaProdutoEditado(Produto.CodigoDoProduto, novaDescricaoProduto, novoPrecoDeCusto, novoPrecoDeVenda)
 }
