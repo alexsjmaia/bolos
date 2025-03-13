@@ -57,16 +57,10 @@ func AlteraProduto(codigoDoProduto int) {
 	fmt.Println("Preço de Custo :", Produto.PrecoDeCusto)
 	fmt.Printf("Novo preço de custo :")
 	fmt.Scan(&novoPrecoDeCusto)
-	if novoPrecoDeCusto+0 == 0 {
-		novoPrecoDeCusto = Produto.PrecoDeCusto
-	}
 
 	fmt.Println("Preço de Venda :", Produto.PrecoDeVenda)
 	fmt.Printf("Novo Preço de Venda :")
 	fmt.Scan(&novoPrecoDeVenda)
-	if novoPrecoDeVenda+0 == 0 {
-		novoPrecoDeVenda = Produto.PrecoDeVenda
-	}
 
 	SalvaProdutoEditado(Produto.CodigoDoProduto, novaDescricaoProduto, novoPrecoDeCusto, novoPrecoDeVenda)
 }

@@ -13,7 +13,7 @@ func SalvaProdutoEditado(codigo_produto int, descricao_produto string, preco_cus
 	}
 	defer db.Close()
 
-	_, err = db.Exec("UPDATE cadastra_produto SET descricao_produto = ?, preco_custo = ?, preco_venda = ? WHERE codigo_produto = ?", descricao_produto, preco_custo, preco_venda, codigo_produto)
+	_, err = db.Exec("update cadastra_produto set descricao_produto = ?, preco_custo = ?, preco_venda = ? WHERE codigo_produto = ?", descricao_produto, preco_custo, preco_venda, codigo_produto)
 	if err != nil {
 		log.Fatal("Erro ao atualizar o produto:", err)
 	}
