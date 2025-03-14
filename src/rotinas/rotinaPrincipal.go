@@ -3,6 +3,7 @@ package rotinas
 import (
 	"bolos/alteraProduto"
 	cadastroDeProdutos "bolos/cadastraProduto"
+	"bolos/relatorios"
 	"bolos/venda"
 	"fmt"
 	"os"
@@ -21,7 +22,7 @@ func RotinaPrincipal(rotina int) {
 	case 3:
 		alteraProduto.AlteraProduto()
 	case 4:
-		fmt.Println("Relatório de produtos cadastrados")
+		relatorios.RelProdCadastrados()
 	case 5:
 		fmt.Println("Relatório de Vendas")
 	default:
