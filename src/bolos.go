@@ -15,6 +15,7 @@ func main() {
 		var rotina int
 		fmt.Printf("Escolha a Rotina :")
 		fmt.Scan(&rotina)
+
 		rotinas.RotinaPrincipal(rotina)
 	}
 }
