@@ -2,6 +2,7 @@ package venda
 
 import (
 	"bolos/dataBase"
+	"bolos/mensagens"
 	"fmt"
 	"strings"
 )
@@ -14,6 +15,9 @@ type Produto struct {
 	TotProd            float64
 }
 
+var ProdutosVendidos []Produto
+var TotalVenda float64
+
 func VendaProduto() {
 	var produtosVendidos []Produto
 	var totalVenda float64
@@ -22,6 +26,18 @@ func VendaProduto() {
 	for {
 		fmt.Print("\nCódigo :")
 		fmt.Scan(&codigoDigitado)
+
+		if codigoDigitado == '*' {
+			mostraProdutos()
+
+			//opcoesDePagamento()
+
+			// Se o Pagamento não for aprovado retorna a tela de produtos
+
+			// Se o Pagamento for aprovado salva no banco
+
+			//dataBase.SalvaVenda()
+		}
 
 		descricao_produto, preco_venda := dataBase.BuscaProdutoNoBanco(codigoDigitado)
 
@@ -41,18 +57,22 @@ func VendaProduto() {
 				TotProd:            totProd,
 			}
 
-			produtosVendidos = append(produtosVendidos, produto)
+			ProdutosVendidos = append(produtosVendidos, produto)
 
-			fmt.Printf("%-4s %-40s %-10s %-10s %-14s\n", "COD", "DESCRIÇÃO", "QTD", "PREÇO", " VENDA")
-			for _, produto := range produtosVendidos {
-				fmt.Printf("%-4d %-40s %-10d R$ %-8.2f R$ %-8.2f\n",
-					produto.CodigoDoProduto, produto.DescricaoDoProduto, produto.Qtd, produto.PrecoDeVenda, produto.TotProd)
-			}
-
-			fmt.Printf("Total Parcial R$ %.2f ", totalVenda)
+			mostraProdutos()
 
 		} else {
-			fmt.Println("Produto não encontrado")
+			mensagens.ProdutoNaoEncontrado(codigoDigitado)
 		}
 	}
+}
+
+func mostraProdutos() {
+	fmt.Printf("%-4s %-40s %-10s %-10s %-14s\n", "COD", "DESCRIÇÃO", "QTD", "PREÇO", " VENDA")
+	for _, produto := range ProdutosVendidos {
+		fmt.Printf("%-4d %-40s %-10d R$ %-8.2f R$ %-8.2f\n",
+			produto.CodigoDoProduto, produto.DescricaoDoProduto, produto.Qtd, produto.PrecoDeVenda, produto.TotProd)
+	}
+
+	fmt.Printf("Total Parcial R$ %.2f ", TotalVenda)
 }

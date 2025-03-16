@@ -1,8 +1,16 @@
 package mensagens
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func MenuPrincipal() {
+	data_atual := time.Now().Format("02/01/2006")
+	hora_atual := time.Now().Format("15:04:05")
+
+	fmt.Print(data_atual, " - ", hora_atual, "\n")
+
 	fmt.Println("1 - Começa Venda")
 	fmt.Println("2 - Cadastra Produto")
 	fmt.Println("3 - Altera Produto/Preço")
