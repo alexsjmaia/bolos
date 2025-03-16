@@ -4,6 +4,7 @@ import (
 	"bolos/dataBase"
 	"bolos/mensagens"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -20,17 +21,19 @@ var TotalVenda float64
 
 func VendaProduto() {
 	var produtosVendidos []Produto
-	var totalVenda float64
+	var TotalVenda float64
 	var codigoDigitado, qtdDigitada int
 
 	for {
 		fmt.Print("\nCódigo :")
 		fmt.Scan(&codigoDigitado)
 
-		if codigoDigitado == '*' {
-			mostraProdutos()
+		fmt.Println("Código Digitado : ", codigoDigitado)
 
-			//opcoesDePagamento()
+		if codigoDigitado == 0 {
+
+			mensagens.OpcoesDePagamento()
+			log.Fatal("Será que chega aqui?")
 
 			// Se o Pagamento não for aprovado retorna a tela de produtos
 
@@ -47,7 +50,7 @@ func VendaProduto() {
 
 			descricaoLimpa := strings.TrimSpace(descricao_produto)
 			totProd := preco_venda * float64(qtdDigitada)
-			totalVenda += float64(totProd)
+			TotalVenda += float64(totProd)
 
 			produto := Produto{
 				CodigoDoProduto:    codigoDigitado,
@@ -59,20 +62,17 @@ func VendaProduto() {
 
 			ProdutosVendidos = append(produtosVendidos, produto)
 
-			mostraProdutos()
+			fmt.Printf("%-4s %-40s %-10s %-10s %-14s\n", "COD", "DESCRIÇÃO", "QTD", "PREÇO", " VENDA")
+
+			for _, produto := range ProdutosVendidos {
+				fmt.Printf("%-4d %-40s %-10d R$ %-8.2f R$ %-8.2f\n",
+					produto.CodigoDoProduto, produto.DescricaoDoProduto, produto.Qtd, produto.PrecoDeVenda, produto.TotProd)
+			}
+
+			fmt.Printf("Total Parcial R$ %.2f ", TotalVenda)
 
 		} else {
 			mensagens.ProdutoNaoEncontrado(codigoDigitado)
 		}
 	}
-}
-
-func mostraProdutos() {
-	fmt.Printf("%-4s %-40s %-10s %-10s %-14s\n", "COD", "DESCRIÇÃO", "QTD", "PREÇO", " VENDA")
-	for _, produto := range ProdutosVendidos {
-		fmt.Printf("%-4d %-40s %-10d R$ %-8.2f R$ %-8.2f\n",
-			produto.CodigoDoProduto, produto.DescricaoDoProduto, produto.Qtd, produto.PrecoDeVenda, produto.TotProd)
-	}
-
-	fmt.Printf("Total Parcial R$ %.2f ", TotalVenda)
 }
