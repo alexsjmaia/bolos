@@ -29,5 +29,8 @@ func BuscaProdutoNoBanco(codigoDigitado int) (string, float64) {
 			log.Fatal("Erro ao buscar a entrada do veiculo no banco", err)
 		}
 	}
+	if Produto.codigo_produto == 0 {
+		return "Erro", 0
+	}
 	return Produto.descricao_produto, Produto.preco_venda
 }

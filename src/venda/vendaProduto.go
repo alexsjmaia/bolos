@@ -23,32 +23,36 @@ func VendaProduto() {
 		fmt.Print("\nCódigo :")
 		fmt.Scan(&codigoDigitado)
 
-		fmt.Print("Qtd :")
-		fmt.Scan(&qtdDigitada)
-
-		fmt.Printf("%-20s %-10s %-15s\n", "Descrição", "Preço", "Total Parcial")
-
 		descricao_produto, preco_venda := dataBase.BuscaProdutoNoBanco(codigoDigitado)
-		descricaoLimpa := strings.TrimSpace(descricao_produto)
-		totProd := preco_venda * float64(qtdDigitada)
-		totalVenda += float64(totProd)
 
-		produto := Produto{
-			CodigoDoProduto:    codigoDigitado,
-			DescricaoDoProduto: descricaoLimpa,
-			PrecoDeVenda:       preco_venda,
-			Qtd:                qtdDigitada,
-			TotProd:            totProd,
-		}
-		produtosVendidos = append(produtosVendidos, produto)
+		if descricao_produto != "Erro" {
+			fmt.Print("Qtd :")
+			fmt.Scan(&qtdDigitada)
 
-		fmt.Printf("Total Parcial R$ %.2f ", totalVenda)
+			descricaoLimpa := strings.TrimSpace(descricao_produto)
+			totProd := preco_venda * float64(qtdDigitada)
+			totalVenda += float64(totProd)
 
-		fmt.Println("\n*******************\n")
-		//fmt.Println(produtosVendidos)
-		//fmt.Printf("%-1s R$ %-10.2f R$ %-40.2f\n", descricaoLimpa, preco_venda, totProd)
-		for indice, produto := range produtosVendidos {
-			fmt.Printf("%d, %+v\n", indice, produto)
+			produto := Produto{
+				CodigoDoProduto:    codigoDigitado,
+				DescricaoDoProduto: descricaoLimpa,
+				PrecoDeVenda:       preco_venda,
+				Qtd:                qtdDigitada,
+				TotProd:            totProd,
+			}
+
+			produtosVendidos = append(produtosVendidos, produto)
+
+			fmt.Printf("%-4s %-40s %-10s %-10s %-14s\n", "COD", "DESCRIÇÃO", "QTD", "PREÇO", " VENDA")
+			for _, produto := range produtosVendidos {
+				fmt.Printf("%-4d %-40s %-10d R$ %-8.2f R$ %-8.2f\n",
+					produto.CodigoDoProduto, produto.DescricaoDoProduto, produto.Qtd, produto.PrecoDeVenda, produto.TotProd)
+			}
+
+			fmt.Printf("Total Parcial R$ %.2f ", totalVenda)
+
+		} else {
+			fmt.Println("Produto não encontrado")
 		}
 	}
 }
