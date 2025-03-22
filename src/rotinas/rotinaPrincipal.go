@@ -24,7 +24,7 @@ func RotinaPrincipal(rotina int) {
 	case 4:
 		relatorios.RelProdCadastrados()
 	case 5:
-		fmt.Println("Relatório de Vendas")
+		relatorios.RelVendas()
 	default:
 		fmt.Println("*** Rotina inváida! ***")
 	}
