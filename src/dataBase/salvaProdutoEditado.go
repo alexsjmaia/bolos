@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// SalvaProdutoEditado salva o produto editado no banco de dados
 func SalvaProdutoEditado(codigo_produto int, descricao_produto string, preco_custo float64, preco_venda float64) {
 	db, err := ConexaoBanco()
 	if err != nil {

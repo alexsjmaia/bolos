@@ -5,6 +5,7 @@ import (
 	"log"
 )
 
+// OpcoesDePagamento Busca as opções de pagamento e imprime na tela
 func OpcoesDePagamento() (int, string) {
 	var opcaoEscolhida int
 	var descricaoOpcaoEscolhida string
@@ -37,6 +38,7 @@ func OpcoesDePagamento() (int, string) {
 		fmt.Println(OpcoesPgto.Codigo, " - ", OpcoesPgto.Descricao)
 	}
 
+	// Solicita uma opção de pagamento e força a escolha entre as opções cadastradas no banco
 	for {
 		fmt.Print("Escolha uma opção :")
 		fmt.Scan(&opcaoEscolhida)

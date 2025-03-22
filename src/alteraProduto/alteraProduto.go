@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// AlteraProduto pede o código do produto e deixa a responsabilidade de alterar para o dataBase
 func AlteraProduto() {
 	fmt.Println("***********************************************************************")
 	fmt.Println("*** Alteração de Produto, Descrição Preço de Venda e preço de custo ***")

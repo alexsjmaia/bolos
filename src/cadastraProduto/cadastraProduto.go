@@ -7,6 +7,7 @@ import (
 	"os"
 )
 
+// CadastraProduto Solicita os dados do produto e chama o database.SalvaProduto para gravar os dados
 func CadastraProduto() {
 	var Produto struct {
 		codigoDoProduto    int
@@ -34,5 +35,6 @@ func CadastraProduto() {
 	fmt.Printf("Preço de Venda R$ ")
 	fmt.Scan(&Produto.precoDeVenda)
 
+	// Chama o database.SalvaProduto para salvar os dados do produto
 	database.SalvaProduto(Produto.codigoDoProduto, Produto.descricaoDoProduto, Produto.precoDeCusto, Produto.precoDeVenda)
 }

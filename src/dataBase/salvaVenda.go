@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// SalvaVenda salva a venda digitana na tela de venda de produto
 func SalvaVenda(CodigoDoProduto int, DescricaoDoProduto string,
 	PrecoDeVenda float64, Qtd_Venda int, opcaoDePagamento int, descricao string) string {
 

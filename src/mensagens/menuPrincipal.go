@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// MenuPrincipal é o menu principal do programa, ee apenas exibe as opções disponiveis em sistema
 func MenuPrincipal() {
 	data_atual := time.Now().Format("02/01/2006")
 	hora_atual := time.Now().Format("15:04:05")

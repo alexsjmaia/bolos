@@ -9,6 +9,7 @@ import (
 
 var TAMANHO_MINIMO_DESCRICAO_PRODUTO = 3
 
+// AlteraProduto Altera os dados do produto, Servindo tambem para alterar o preço de custo e preço de venda
 func AlteraProduto(codigoDoProduto int) {
 
 	db, err := ConexaoBanco()

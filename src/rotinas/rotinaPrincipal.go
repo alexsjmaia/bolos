@@ -9,6 +9,8 @@ import (
 	"os"
 )
 
+// RotinaPrincipal é a rotina responsável por chamar cada função atrelada a ela.
+// Falta implementar um limpa tela para melhor visualização
 func RotinaPrincipal(rotina int) {
 	switch rotina {
 	case 0:

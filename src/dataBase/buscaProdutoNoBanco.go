@@ -4,6 +4,7 @@ import (
 	"log"
 )
 
+// BuscaProdutoNoBanco busca o produto para o relatório de produtos cadastrados
 func BuscaProdutoNoBanco(codigoDigitado int) (string, float64) {
 	var Produto struct {
 		id                int

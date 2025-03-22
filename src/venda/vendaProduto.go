@@ -19,6 +19,9 @@ type Produto struct {
 var ProdutosVendidos []Produto
 var TotalVenda float64
 
+// VendaProduto tela de venda de produto onde solicita o código e quantidade a ser vendida,
+// falta implementar a opçõ de não pedir a quantidade
+// falta implementar a opção de qtd*ref para o sistema reconhecer a quantidade digitada no campo ref
 func VendaProduto() {
 	var TotalVenda float64
 	var codigoDigitado, qtdDigitada int

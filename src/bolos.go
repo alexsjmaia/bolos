@@ -6,6 +6,7 @@ import (
 	"fmt"
 )
 
+// main função main responsável pelo start do programa
 func main() {
 	mensagens.Saudacao()
 

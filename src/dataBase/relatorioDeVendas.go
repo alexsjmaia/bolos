@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// RelatorioDeVendas busca as vendas no banco de dados e retorna as vendas da data escolhida pelo usuário
 func RelatorioDeVendas(dataDoRelatorio string) {
 	var Produto struct {
 		id                int
@@ -51,8 +52,11 @@ func RelatorioDeVendas(dataDoRelatorio string) {
 			&Produto.hora_venda); err != nil {
 			log.Fatal("Erro ao buscar os dados no banco", err)
 		}
+
+		//descricaoLimpa serve para limpar a descrição e não dar ulo de linha ao exibir
 		descricaoLimpa := strings.TrimSpace(Produto.descricao_produto)
 
+		// Exibe os produtos vendidos de acordo com o Cabeçalho do relatório
 		fmt.Printf("%-4d %-40s R$ %-9.2f %-4d %s %s\n",
 			Produto.id,
 			descricaoLimpa,

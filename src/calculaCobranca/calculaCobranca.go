@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+// CalcularCobranca calcula a cobrança quando o pagamento for em dinheiro
+// Falta implemetar o calculo para aceitar mais de uma forma de pagamento
 func CalcularCobranca(totalDaVenda float64) {
 	var valorRecebido float64
 
