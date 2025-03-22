@@ -17,6 +17,7 @@ func CalcularCobranca(totalDaVenda float64) {
 
 		if valorRecebido > totalDaVenda {
 			fmt.Println("Troco R$ ", valorRecebido-totalDaVenda)
+			break
 		} else {
 			fmt.Println("Falta R$ ", totalDaVenda-valorRecebido)
 		}

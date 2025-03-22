@@ -33,17 +33,14 @@ func VendaProduto() {
 
 		if codigoDigitado == 0 {
 
-			opcaoDePagamento, descricao, status := dataBase.OpcoesDePagamento()
+			opcaoDePagamento, descricao := dataBase.OpcoesDePagamento()
 
-			if status {
-				fmt.Println("Opção", opcaoDePagamento, " ", descricao)
-
-				if descricao == "Dinheiro" {
-					calculacobranca.CalcularCobranca(TotalVenda)
-				}
-
+			if opcaoDePagamento == 1 {
+				calculacobranca.CalcularCobranca(TotalVenda)
+				fmt.Println("A opção escolhida foi ", opcaoDePagamento, descricao)
 				log.Fatal("Salvar a venda no banco")
-
+			} else {
+				log.Fatal("A opção escolhida foi diferente de dinheiro", opcaoDePagamento)
 			}
 		}
 

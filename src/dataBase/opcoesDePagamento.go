@@ -5,15 +5,16 @@ import (
 	"log"
 )
 
-func OpcoesDePagamento() (int, string, bool) {
+func OpcoesDePagamento() (int, string) {
 	var opcaoEscolhida int
+	var descricaoOpcaoEscolhida string
 
 	var OpcoesPgto struct {
 		Id        int
 		Codigo    int
 		Descricao string
 	}
-	var opcoes []int
+	var opcoes []string
 
 	db, err := ConexaoBanco()
 	if err != nil {
@@ -31,7 +32,7 @@ func OpcoesDePagamento() (int, string, bool) {
 			log.Fatal("Erro ao buscar as formas de pagamento no banco", err)
 		}
 
-		opcoes = append(opcoes, OpcoesPgto.Codigo)
+		opcoes = append(opcoes, OpcoesPgto.Descricao)
 
 		fmt.Println(OpcoesPgto.Codigo, " - ", OpcoesPgto.Descricao)
 	}
@@ -40,12 +41,12 @@ func OpcoesDePagamento() (int, string, bool) {
 		fmt.Print("Escolha uma opção :")
 		fmt.Scan(&opcaoEscolhida)
 
-		for _, codigo := range opcoes {
-			if codigo == opcaoEscolhida {
-				return OpcoesPgto.Codigo, OpcoesPgto.Descricao, true
-			} else {
-				return opcaoEscolhida, "Erro", true
-			}
+		if opcaoEscolhida > 0 && opcaoEscolhida <= len(opcoes) {
+			descricaoOpcaoEscolhida = opcoes[opcaoEscolhida-1]
+			break
+		} else {
+			fmt.Println("Opção inválida!")
 		}
 	}
+	return opcaoEscolhida, descricaoOpcaoEscolhida
 }
