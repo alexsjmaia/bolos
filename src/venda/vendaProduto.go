@@ -5,7 +5,6 @@ import (
 	"bolos/dataBase"
 	"bolos/mensagens"
 	"fmt"
-	"log"
 	"strings"
 )
 
@@ -21,9 +20,9 @@ var ProdutosVendidos []Produto
 var TotalVenda float64
 
 func VendaProduto() {
-	var produtosVendidos []Produto
 	var TotalVenda float64
 	var codigoDigitado, qtdDigitada int
+	var horaDaVenda string
 
 	for {
 		fmt.Print("\nCódigo :")
@@ -32,16 +31,25 @@ func VendaProduto() {
 		fmt.Println("Código Digitado : ", codigoDigitado)
 
 		if codigoDigitado == 0 {
-
 			opcaoDePagamento, descricao := dataBase.OpcoesDePagamento()
 
 			if opcaoDePagamento == 1 {
 				calculacobranca.CalcularCobranca(TotalVenda)
 				fmt.Println("A opção escolhida foi ", opcaoDePagamento, descricao)
-				log.Fatal("Salvar a venda no banco")
-			} else {
-				log.Fatal("A opção escolhida foi diferente de dinheiro", opcaoDePagamento)
 			}
+
+			for _, produto := range ProdutosVendidos {
+				horaDaVenda = dataBase.SalvaVenda(
+					produto.CodigoDoProduto,
+					produto.DescricaoDoProduto,
+					produto.PrecoDeVenda,
+					produto.Qtd,
+					opcaoDePagamento,
+					descricao,
+				)
+			}
+			fmt.Println("Venda Gravada com sucesso", horaDaVenda)
+			return
 		}
 
 		descricao_produto, preco_venda := dataBase.BuscaProdutoNoBanco(codigoDigitado)
@@ -62,7 +70,7 @@ func VendaProduto() {
 				TotProd:            totProd,
 			}
 
-			ProdutosVendidos = append(produtosVendidos, produto)
+			ProdutosVendidos = append(ProdutosVendidos, produto)
 
 			fmt.Printf("%-4s %-40s %-10s %-10s %-14s\n", "COD", "DESCRIÇÃO", "QTD", "PREÇO", " VENDA")
 
